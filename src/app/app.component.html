@@ -1,24 +1,2 @@
-<div>
-  <input
-    type="text"
-    (input)="changeFilter($event)"
-    placeholder="Search products..."
-  />
-</div>
-<br />
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of filteredProducts()">
-      <td>{{ product.id }}</td>
-      <td>{{ product.name }}</td>
-      <td>£{{ product.price }}</td>
-    </tr>
-  </tbody>
-</table>
+<h1>Products</h1>
+<product-list [products]="allProducts"></product-list>
