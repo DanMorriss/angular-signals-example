@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { signal, effect } from '@angular/core';
+import { signal, computed } from '@angular/core';
+import { single } from 'rxjs';
+import { sign } from 'crypto';
 
 @Component({
   selector: 'app-root',
@@ -11,15 +13,16 @@ import { signal, effect } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-signals-example';
-  theme = signal('light');
-  label = this.theme();
-  constructor () {
-    effect(() => {
-      this.label = this.theme();
-    });
-  }
 
-  toggleDarkMode() {
-    this.theme.update(currentValue => currentValue === 'light' ? 'dark' : 'light');
+  price = 19;
+
+  quantity = signal(10);
+
+  // computed cannot be set directly
+  totalPrice = computed(() => this.price * this.quantity());
+
+  changeQuantity(event: Event) {
+    this.quantity.set((event.target as HTMLInputElement).valueAsNumber);
   }
+  
 }
